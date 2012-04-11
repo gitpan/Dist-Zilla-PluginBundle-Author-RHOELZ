@@ -1,7 +1,7 @@
 ## no critic (RequireUseStrict)
 package Dist::Zilla::PluginBundle::Author::RHOELZ;
 {
-  $Dist::Zilla::PluginBundle::Author::RHOELZ::VERSION = '0.01';
+  $Dist::Zilla::PluginBundle::Author::RHOELZ::VERSION = '0.02';
 }
 
 ## use critic (RequireUseStrict)
@@ -90,6 +90,8 @@ sub configure {
     ]);
 
     $self->add_plugins(
+        'Git::ExcludeUntracked',
+        'CheckChangesHasContent',
         'ConfirmRelease',
         'UploadToCPAN',
         'PkgVersion',
@@ -111,7 +113,7 @@ Dist::Zilla::PluginBundle::Author::RHOELZ - BeLike::RHOELZ when you build your d
 
 =head1 VERSION
 
-version 0.01
+version 0.02
 
 =head1 SYNOPSIS
 
@@ -137,6 +139,7 @@ equivalent to the following:
   [Git::Tag]
   tag_format  = %v
   tag_message = %v
+  signed      = 1
   [Git::NextVersion]
   first_version  = 0.01
   version_regexp = ^(\d+\.\d+)$
@@ -161,6 +164,8 @@ equivalent to the following:
   [PruneFiles]
   filename = dist.ini
   filename = weaver.ini
+  [Git::ExcludeUntracked]
+  [CheckChangesHasContent]
   [ConfirmRelease]
   [UploadToCPAN]
   [PkgVersion]
@@ -169,6 +174,16 @@ equivalent to the following:
 =head1 SEE ALSO
 
 L<Dist::Zilla>
+
+=begin comment
+
+=over
+
+=item configure
+
+=back
+
+=end comment
 
 =head1 AUTHOR
 

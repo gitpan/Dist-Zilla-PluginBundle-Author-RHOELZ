@@ -17,14 +17,16 @@ my %module_build_args = (
     "Rob Hoelz <rob\@hoelz.ro>"
   ],
   "dist_name" => "Dist-Zilla-PluginBundle-Author-RHOELZ",
-  "dist_version" => "0.01",
+  "dist_version" => "0.02",
   "license" => "perl",
   "module_name" => "Dist::Zilla::PluginBundle::Author::RHOELZ",
   "recommends" => {},
   "recursive_test_files" => 1,
   "requires" => {
     "Dist::Zilla" => 0,
+    "Dist::Zilla::Plugin::CheckChangesHasContent" => 0,
     "Dist::Zilla::Plugin::Git::Check" => 0,
+    "Dist::Zilla::Plugin::Git::ExcludeUntracked" => 0,
     "Dist::Zilla::Plugin::GithubMeta" => 0,
     "Dist::Zilla::Plugin::PodWeaver" => 0,
     "Dist::Zilla::Plugin::ReadmeAnyFromPod" => 0,
