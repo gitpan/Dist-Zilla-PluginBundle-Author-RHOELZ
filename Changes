@@ -1,5 +1,9 @@
 Revision history for Dist-Zilla-PluginBundle-Author-RHOELZ
 
+0.03 August 13 2012
+     - Add ability to omit plugins
+     - Add abliity to specify custom configuration for included plugins
+
 0.02 April 11 2012
      - Add Git::ExcludeUntracked
      - Add CheckChangesHasContent

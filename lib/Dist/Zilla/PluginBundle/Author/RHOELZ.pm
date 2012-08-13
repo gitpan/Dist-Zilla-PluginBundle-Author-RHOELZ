@@ -1,7 +1,7 @@
 ## no critic (RequireUseStrict)
 package Dist::Zilla::PluginBundle::Author::RHOELZ;
 {
-  $Dist::Zilla::PluginBundle::Author::RHOELZ::VERSION = '0.02';
+  $Dist::Zilla::PluginBundle::Author::RHOELZ::VERSION = '0.03';
 }
 
 ## use critic (RequireUseStrict)
@@ -12,8 +12,68 @@ use Moose;
 
 with 'Dist::Zilla::Role::PluginBundle::Easy';
 
+my $main_section_processed;
+my %global_omissions;
+
+has omissions => (
+    is      => 'ro',
+    default => sub { +{ %global_omissions } },
+);
+
+sub mvp_multivalue_args {
+    return '-omit';
+}
+
+around add_plugins => sub {
+    my ( $orig, $self, @specs ) = @_;
+
+    foreach my $spec (@specs) {
+        my $name = ref($spec) ? $spec->[0] : $spec;
+
+        if(delete $self->omissions->{$name}) {
+            undef $spec;
+        }
+    }
+
+    @_ = ( $self, grep { defined() } @specs );
+
+    goto &$orig;
+};
+
+sub check_omissions {
+    my ( $self ) = @_;
+
+    my $omissions = $self->omissions;
+
+    if(%$omissions) {
+        die "You asked to omit the following plugins, but they were not included in the bundle:\n" .
+            join('', map { "  $_\n" } sort keys %$omissions);
+    }
+}
+
 sub configure {
     my ( $self ) = @_;
+
+    unless($self->name eq '@Author::RHOELZ') {
+        if($main_section_processed) {
+            die("Custom configuration sections for Author::RHOELZ sections must precede the main one\n");
+        }
+        $global_omissions{$self->name} = 1;
+        $self->add_plugins([
+            $self->name,
+            $self->payload,
+        ]);
+        return;
+    }
+
+    $main_section_processed = 1;
+
+    my $omit = $self->payload->{'-omit'};
+    if($omit) {
+        foreach my $plugin (@$omit) {
+            $self->omissions->{$plugin} = 1;
+        }
+    }
 
     $self->add_plugins([
         GithubMeta => {
@@ -97,6 +157,8 @@ sub configure {
         'PkgVersion',
         'PodWeaver',
     );
+
+    $self->check_omissions;
 }
 
 __PACKAGE__->meta->make_immutable;
@@ -113,7 +175,7 @@ Dist::Zilla::PluginBundle::Author::RHOELZ - BeLike::RHOELZ when you build your d
 
 =head1 VERSION
 
-version 0.02
+version 0.03
 
 =head1 SYNOPSIS
 
@@ -171,6 +233,20 @@ equivalent to the following:
   [PkgVersion]
   [PodWeaver]
 
+=head1 CUSTOMIZATION
+
+You may omit a plugin using C<-omit>:
+
+  [@Author::RHOELZ]
+  -omit = UploadToCPAN
+
+You may also provide a custom configuration for a plugin; this B<must> precede
+the main C<@Author::RHOELZ> section.
+
+  [@Author::RHOELZ / Test::Kwalitee]
+  skiptest = use_strict
+  [@Author::RHOELZ]
+
 =head1 SEE ALSO
 
 L<Dist::Zilla>
@@ -180,6 +256,10 @@ L<Dist::Zilla>
 =over
 
 =item configure
+
+=item mvp_multivalue_args
+
+=item check_omissions
 
 =back
 
