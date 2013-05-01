@@ -17,7 +17,7 @@ my %module_build_args = (
     "Rob Hoelz <rob\@hoelz.ro>"
   ],
   "dist_name" => "Dist-Zilla-PluginBundle-Author-RHOELZ",
-  "dist_version" => "0.03",
+  "dist_version" => "0.04",
   "license" => "perl",
   "module_name" => "Dist::Zilla::PluginBundle::Author::RHOELZ",
   "recommends" => {},
