@@ -1,7 +1,7 @@
 ## no critic (RequireUseStrict)
 package Dist::Zilla::PluginBundle::Author::RHOELZ;
 {
-  $Dist::Zilla::PluginBundle::Author::RHOELZ::VERSION = '0.04';
+  $Dist::Zilla::PluginBundle::Author::RHOELZ::VERSION = '0.05';
 }
 
 ## use critic (RequireUseStrict)
@@ -193,9 +193,19 @@ sub configure {
         },
     ]);
 
+    $self->add_plugins([
+        GatherDir => {
+            include_dotfiles => 1,
+        },
+    ]);
+
+    $self->add_plugins([
+        PruneCruft => {
+            except => '\.perlcriticrc',
+        },
+    ]);
+
     $self->add_plugins(
-        'GatherDir',
-        'PruneCruft',
         'MetaYAML',
         'License',
         'Readme',
@@ -232,9 +242,9 @@ __PACKAGE__->meta->make_immutable;
 
 1;
 
-
-
 =pod
+
+=encoding UTF-8
 
 =head1 NAME
 
@@ -242,7 +252,7 @@ Dist::Zilla::PluginBundle::Author::RHOELZ - BeLike::RHOELZ when you build your d
 
 =head1 VERSION
 
-version 0.04
+version 0.05
 
 =head1 SYNOPSIS
 
@@ -277,7 +287,9 @@ equivalent to the following:
   filename = README.pod
   location = root
   [GatherDir]
+  include_dotfiles = 1
   [PruneCruft]
+  except = \.perlcriticrc
   [MetaYAML]
   [License]
   [Readme]
@@ -340,7 +352,7 @@ Rob Hoelz <rob@hoelz.ro>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2013 by Rob Hoelz.
+This software is copyright (c) 2014 by Rob Hoelz.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
@@ -355,7 +367,6 @@ patch to an existing test-file that illustrates the bug or desired
 feature.
 
 =cut
-
 
 __END__
 
