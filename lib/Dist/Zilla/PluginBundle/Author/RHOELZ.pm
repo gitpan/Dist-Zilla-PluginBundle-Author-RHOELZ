@@ -1,9 +1,6 @@
 ## no critic (RequireUseStrict)
 package Dist::Zilla::PluginBundle::Author::RHOELZ;
-{
-  $Dist::Zilla::PluginBundle::Author::RHOELZ::VERSION = '0.05';
-}
-
+$Dist::Zilla::PluginBundle::Author::RHOELZ::VERSION = '0.06';
 ## use critic (RequireUseStrict)
 use strict;
 use warnings;
@@ -121,7 +118,7 @@ sub check_omissions {
 sub configure {
     my ( $self ) = @_;
 
-    unless($self->name eq '@Author::RHOELZ') {
+    if($self->name ne '@Author::RHOELZ' && $self->name !~ /^@/) {
         if($main_section_processed) {
             die("Custom configuration sections for Author::RHOELZ sections must precede the main one\n");
         }
@@ -252,7 +249,7 @@ Dist::Zilla::PluginBundle::Author::RHOELZ - BeLike::RHOELZ when you build your d
 
 =head1 VERSION
 
-version 0.05
+version 0.06
 
 =head1 SYNOPSIS
 

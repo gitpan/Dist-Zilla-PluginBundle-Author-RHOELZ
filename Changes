@@ -1,5 +1,8 @@
 Revision history for Dist-Zilla-PluginBundle-Author-RHOELZ
 
+0.06 January 03 2015
+     - Fix bug that prevents this bundle from being used with @Filter
+
 0.05 March 03 2014
      - Include .perlcriticrc if it exists in a dist
 

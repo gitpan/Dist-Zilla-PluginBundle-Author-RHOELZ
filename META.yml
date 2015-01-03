@@ -3,34 +3,34 @@ abstract: 'BeLike::RHOELZ when you build your distributions.'
 author:
   - 'Rob Hoelz <rob@hoelz.ro>'
 build_requires:
-  File::Spec: 0
-  IO::Handle: 0
-  IPC::Open3: 0
-  Module::Build: 0.3601
-  Test::More: 0
+  File::Spec: '0'
+  IO::Handle: '0'
+  IPC::Open3: '0'
+  Module::Build: '0.28'
+  Test::More: '0'
 configure_requires:
-  Module::Build: 0.3601
+  Module::Build: '0.28'
 dynamic_config: 0
-generated_by: 'Dist::Zilla version 5.006, CPAN::Meta::Converter version 2.133380'
+generated_by: 'Dist::Zilla version 5.029, CPAN::Meta::Converter version 2.143240'
 license: perl
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
-  version: 1.4
+  version: '1.4'
 name: Dist-Zilla-PluginBundle-Author-RHOELZ
 requires:
-  Dist::Zilla: 0
-  Dist::Zilla::Plugin::CheckChangesHasContent: 0
-  Dist::Zilla::Plugin::Git::Check: 0
-  Dist::Zilla::Plugin::Git::ExcludeUntracked: 0
-  Dist::Zilla::Plugin::GithubMeta: 0
-  Dist::Zilla::Plugin::PodWeaver: 0
-  Dist::Zilla::Plugin::ReadmeAnyFromPod: 0
-  Dist::Zilla::Plugin::Test::Compile: 0
-  Dist::Zilla::Plugin::Test::DistManifest: 0
-  Dist::Zilla::Plugin::Test::Kwalitee: 0
-  Dist::Zilla::Plugin::Test::Perl::Critic: 0
+  Dist::Zilla: '0'
+  Dist::Zilla::Plugin::CheckChangesHasContent: '0'
+  Dist::Zilla::Plugin::Git::Check: '0'
+  Dist::Zilla::Plugin::Git::ExcludeUntracked: '0'
+  Dist::Zilla::Plugin::GithubMeta: '0'
+  Dist::Zilla::Plugin::PodWeaver: '0'
+  Dist::Zilla::Plugin::ReadmeAnyFromPod: '0'
+  Dist::Zilla::Plugin::Test::Compile: '0'
+  Dist::Zilla::Plugin::Test::DistManifest: '0'
+  Dist::Zilla::Plugin::Test::Kwalitee: '0'
+  Dist::Zilla::Plugin::Test::Perl::Critic: '0'
 resources:
   bugtracker: https://github.com/hoelzro/dist-zilla-pluginbundle-author-rhoelz/issues
   homepage: https://github.com/hoelzro/dist-zilla-pluginbundle-author-rhoelz
   repository: https://github.com/hoelzro/dist-zilla-pluginbundle-author-rhoelz.git
-version: 0.05
+version: '0.06'
